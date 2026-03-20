@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Flower Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="iris-icon">🌸</div>
+            <h1>Iris Prediction</h1>
+            <p>Predict iris flower species using flower measurements</p>
+        </div>
+
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="sepalLength">Sepal Length (cm)</label>
+                <input 
+                    type="number" 
+                    id="sepalLength" 
+                    name="sepalLength" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 5.1"
+                    required
+                >
+                <div class="input-info">Typical range: 4.3 - 7.9 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="sepalWidth">Sepal Width (cm)</label>
+                <input 
+                    type="number" 
+                    id="sepalWidth" 
+                    name="sepalWidth" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 3.5"
+                    required
+                >
+                <div class="input-info">Typical range: 2.0 - 4.4 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="petalLength">Petal Length (cm)</label>
+                <input 
+                    type="number" 
+                    id="petalLength" 
+                    name="petalLength" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 1.4"
+                    required
+                >
+                <div class="input-info">Typical range: 1.0 - 6.9 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="petalWidth">Petal Width (cm)</label>
+                <input 
+                    type="number" 
+                    id="petalWidth" 
+                    name="petalWidth" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 0.2"
+                    required
+                >
+                <div class="input-info">Typical range: 0.1 - 2.5 cm</div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="predict-btn" id="predictBtn">Predict Species</button>
+                <button type="reset" class="reset-btn">Clear</button>
+            </div>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; color: #667eea;">Making prediction...</p>
+        </div>
+
+        <div class="result" id="result"></div>
+
+        <!-- Retrieve predictions section -->
+        <div class="retrieve-section">
+            <h2>📊 View Predictions</h2>
+            
+            <div class="retrieve-buttons">
+                <button type="button" class="retrieve-btn" id="getAllBtn">Get All Predictions</button>
+            </div>
+
+            <div class="class-filter">
+                <label for="className">Filter by Class:</label>
+                <select id="className">
+                    <option value="">Select a class...</option>
+                    <option value="setosa">Setosa</option>
+                    <option value="versicolor">Versicolor</option>
+                    <option value="virginica">Virginica</option>
+                </select>
+                <button type="button" class="retrieve-btn" id="getClassBtn">Get Class Predictions</button>
+            </div>
+
+            <div class="loading" id="loadingData">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px; color: #667eea;">Loading predictions...</p>
+            </div>
+
+            <div class="predictions-table" id="predictionsTable"></div>
+        </div>
+    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Flower Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="iris-icon">🌸</div>
+            <h1>Iris Prediction</h1>
+            <p>Predict iris flower species using flower measurements</p>
+        </div>
+
+        <form id="predictionForm">
+            <div class="form-group">
+                <label for="sepalLength">Sepal Length (cm)</label>
+                <input 
+                    type="number" 
+                    id="sepalLength" 
+                    name="sepalLength" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 5.1"
+                    required
+                >
+                <div class="input-info">Typical range: 4.3 - 7.9 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="sepalWidth">Sepal Width (cm)</label>
+                <input 
+                    type="number" 
+                    id="sepalWidth" 
+                    name="sepalWidth" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 3.5"
+                    required
+                >
+                <div class="input-info">Typical range: 2.0 - 4.4 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="petalLength">Petal Length (cm)</label>
+                <input 
+                    type="number" 
+                    id="petalLength" 
+                    name="petalLength" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 1.4"
+                    required
+                >
+                <div class="input-info">Typical range: 1.0 - 6.9 cm</div>
+            </div>
+
+            <div class="form-group">
+                <label for="petalWidth">Petal Width (cm)</label>
+                <input 
+                    type="number" 
+                    id="petalWidth" 
+                    name="petalWidth" 
+                    step="0.1" 
+                    min="0"
+                    placeholder="e.g., 0.2"
+                    required
+                >
+                <div class="input-info">Typical range: 0.1 - 2.5 cm</div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" class="predict-btn" id="predictBtn">Predict Species</button>
+                <button type="reset" class="reset-btn">Clear</button>
+            </div>
+        </form>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p style="margin-top: 10px; color: #667eea;">Making prediction...</p>
+        </div>
+
+        <div class="result" id="result"></div>
+
+        <!-- Retrieve predictions section -->
+        <div class="retrieve-section">
+            <h2>📊 View Predictions</h2>
+            
+            <div class="retrieve-buttons">
+                <button type="button" class="retrieve-btn" id="getAllBtn">Get All Predictions</button>
+            </div>
+
+            <div class="class-filter">
+                <label for="className">Filter by Class:</label>
+                <select id="className">
+                    <option value="">Select a class...</option>
+                    <option value="setosa">Setosa</option>
+                    <option value="versicolor">Versicolor</option>
+                    <option value="virginica">Virginica</option>
+                </select>
+                <button type="button" class="retrieve-btn" id="getClassBtn">Get Class Predictions</button>
+            </div>
+
+            <div class="loading" id="loadingData">
+                <div class="spinner"></div>
+                <p style="margin-top: 10px; color: #667eea;">Loading predictions...</p>
+            </div>
+
+            <div class="predictions-table" id="predictionsTable"></div>
+        </div>
+    </div>
+<script>
+const API_BASE = "https://your-render-url.onrender.com";
+
+const form = document.getElementById('predictionForm');
+const resultDiv = document.getElementById('result');
+const predictBtn = document.getElementById('predictBtn');
+const loading = document.getElementById('loading');
+const getAllBtn = document.getElementById('getAllBtn');
+const getClassBtn = document.getElementById('getClassBtn');
+const classNameSelect = document.getElementById('className');
+const loadingData = document.getElementById('loadingData');
+const predictionsTable = document.getElementById('predictionsTable');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const sepalLength = parseFloat(document.getElementById('sepalLength').value);
+    const sepalWidth = parseFloat(document.getElementById('sepalWidth').value);
+    const petalLength = parseFloat(document.getElementById('petalLength').value);
+    const petalWidth = parseFloat(document.getElementById('petalWidth').value);
+
+    loading.classList.add('show');
+    predictBtn.disabled = true;
+    resultDiv.classList.remove('show');
+
+    try {
+        const response = await fetch(`${API_BASE}/predict/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                sepal_length: sepalLength,
+                sepal_width: sepalWidth,
+                petal_length: petalLength,
+                petal_width: petalWidth
+            })
+        });
+
+        loading.classList.remove('show');
+
+        if (!response.ok) throw new Error("Prediction failed");
+
+        const data = await response.json();
+
+        resultDiv.className = 'result success show';
+        resultDiv.innerHTML = `
+            <h3>✓ Prediction Successful</h3>
+            <div class="prediction-box">
+                <div class="prediction-label">Predicted Species</div>
+                <div class="prediction-value">${data.predicted_class}</div>
+            </div>
+        `;
+    } catch (error) {
+        loading.classList.remove('show');
+
+        resultDiv.className = 'result error show';
+        resultDiv.innerHTML = `
+            <h3>✗ Error</h3>
+            <p>${error.message}</p>
+        `;
+    } finally {
+        predictBtn.disabled = false;
+    }
+});
+
+
+// 🔥 GET ALL
+getAllBtn.addEventListener('click', async () => {
+    loadingData.classList.add('show');
+    predictionsTable.classList.remove('show');
+
+    try {
+        const response = await fetch(`${API_BASE}/predictions/`);
+        const data = await response.json();
+        displayPredictions(data);
+    } catch (error) {
+        loadingData.classList.remove('show');
+        predictionsTable.innerHTML = `<p>Error loading data</p>`;
+    }
+});
+
+
+// 🔥 FILTER
+getClassBtn.addEventListener('click', async () => {
+    const className = classNameSelect.value;
+
+    if (!className) {
+        alert('Select class');
+        return;
+    }
+
+    loadingData.classList.add('show');
+
+    try {
+        const response = await fetch(`${API_BASE}/class/${className}`);
+        const data = await response.json();
+        displayPredictions(data);
+    } catch (error) {
+        loadingData.classList.remove('show');
+        predictionsTable.innerHTML = `<p>Error loading data</p>`;
+    }
+});
+
+
+// 🔥 TABLE
+function displayPredictions(predictions) {
+    loadingData.classList.remove('show');
+    predictionsTable.classList.add('show');
+
+    if (!predictions.length) {
+        predictionsTable.innerHTML = "No data";
+        return;
+    }
+
+    let html = `
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Sepal</th>
+                <th>Width</th>
+                <th>Petal</th>
+                <th>Width</th>
+                <th>Class</th>
+            </tr>
+    `;
+
+    predictions.forEach(p => {
+        html += `
+            <tr>
+                <td>${p.id}</td>
+                <td>${p.sepal_length}</td>
+                <td>${p.sepal_width}</td>
+                <td>${p.petal_length}</td>
+                <td>${p.petal_width}</td>
+                <td>${p.predicted_class}</td>
+            </tr>
+        `;
+    });
+
+    html += "</table>";
+    predictionsTable.innerHTML = html;
+}
+</script>
