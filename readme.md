@@ -3,8 +3,11 @@
 A full-stack Machine Learning Web Application that predicts the species of an Iris flower based on its measurements.
 
 ---
+## 🚀 Live Demo
+Frontend: https://iris-flower-prediction.netlify.app/  
+Backend: https://end-to-end-iris-flower-prediction.onrender.com/ 
 
-## 🚀 Features
+## 🐱‍🏍 Features
 
 - Predict Iris species using ML model
 - Store predictions in PostgreSQL
