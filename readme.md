@@ -4,8 +4,7 @@ A full-stack Machine Learning Web Application that predicts the species of an Ir
 
 ---
 ## 🚀 Live Demo
-Frontend: https://iris-flower-prediction.netlify.app/  
-Backend: https://end-to-end-iris-flower-prediction.onrender.com/ 
+Web APP : https://iris-flower-prediction.netlify.app/  
 
 ## 🐱‍🏍 Features
 
