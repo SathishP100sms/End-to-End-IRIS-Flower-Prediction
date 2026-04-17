@@ -86,3 +86,12 @@ Run:
 pip install scikit-learn
 
 ---
+## 🌐 Deployment
+
+### Frontend
+
+* Vercel / Netlify
+
+### Backend
+
+* Render
