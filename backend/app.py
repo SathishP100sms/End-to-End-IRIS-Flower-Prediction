@@ -13,7 +13,7 @@ app = FastAPI(title="Iris Prediction API")
 # Enable CORS (for frontend like Netlify)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # change later for security
+    allow_origins=["https://iris-flower-prediction.netlify.app","https://iris-flower-prediction-demo.vercel.app"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
